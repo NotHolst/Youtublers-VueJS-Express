@@ -3,7 +3,7 @@
       <h4 class="display-1 mb-4">Upload video</h4>
     <v-form v-model="valid" ref="form" lazy-validation>
 
-        <input type="file" id="video" v-on:change="setVideo"/>
+        <input type="file" id="video" name="video" v-on:change="setVideo"/>
         <label class="btnUpload" for="video">{{uploadText}}</label>
         <v-divider class="mt-2 mb-2"/>
         <v-text-field
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import Api from '../Api';
 export default {
   name: 'UploadVideo',
   data: () => ({
@@ -68,7 +68,10 @@ export default {
       },
       submit () {
         if (this.$refs.form.validate()) {
-          axios.post('/videos/upload', {
+
+          const formData = new FormData();
+
+          Api().post('/videos/upload', {
             title: this.title,
             description: this.description,
             video: this.video,

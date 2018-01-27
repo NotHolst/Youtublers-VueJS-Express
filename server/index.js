@@ -1,12 +1,13 @@
 const express = require('express');
-const parser = require('body-parser');
 const cors = require('cors');
 const {sequelize} = require('./models')
 const {User} = require('./models')
+const parser = require('body-parser')
 
 const app = express();
-app.use(parser.json());
 app.use(cors());
+app.use(parser.json());
+app.use(express.static('./public'))
 
 require('./routes')(app)
 

@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import SignUp from '@/components/SignUp'
+import Login from '@/components/Login'
 import MostPopular from '@/components/MostPopular'
 import MyVideos from '@/components/MyVideos'
 import UploadVideo from '@/components/UploadVideo'
@@ -28,6 +30,16 @@ export default new Router({
       path: '/user/videos/upload',
       name: 'UploadVideo',
       component: UploadVideo
-    }
+    },
+    {
+      path: '/signup',
+      name: 'SignUp',
+      component: SignUp
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
   ]
 })

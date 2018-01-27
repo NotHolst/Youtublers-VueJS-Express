@@ -55,9 +55,15 @@
           hide-details
         ></v-text-field>
       </v-layout>
+      <v-btn v-if="!$store.state.user" class="ml-4" @click="$router.push('signup')">Sign Up</v-btn>
+      <v-btn v-if="!$store.state.user" @click="$router.push('login')">Login</v-btn>
+      <v-btn v-if="$store.state.user" class="ml-4" @click="$router.push('user')">{{$store.state.user.username}}</v-btn>
     </v-toolbar>
     <v-content>
       <v-container fluid>
+        <v-alert color="success" icon="checkmark" :value="$route.params.flashMessage != null">
+          {{$route.params.flashMessage}}
+        </v-alert>
         <router-view></router-view>
       </v-container>
     </v-content>

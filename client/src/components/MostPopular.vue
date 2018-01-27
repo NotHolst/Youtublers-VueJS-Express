@@ -19,31 +19,18 @@
 </template>
 
 <script>
+import Api from '../Api'
 export default {
   name: 'MostPopular',
   data () {
     return {
-      videos: [
-        {
-          id: 'testID1',
-          title: 'test data',
-          description: 'test data description',
-          thumbnail: 'https://i.ytimg.com/vi/Pxvmb2ykGTA/hqdefault.jpg?sqp=-oaymwEYCNIBEHZIVfKriqkDCwgBFQAAiEIYAXAB&rs=AOn4CLDCGwdrklSj6MmIcU13frqifHgL8w'
-        },
-        {
-          id: 'testID2',
-          title: 'test data',
-          description: 'test data description',
-          thumbnail: 'https://i.ytimg.com/vi/Pxvmb2ykGTA/hqdefault.jpg?sqp=-oaymwEYCNIBEHZIVfKriqkDCwgBFQAAiEIYAXAB&rs=AOn4CLDCGwdrklSj6MmIcU13frqifHgL8w'
-        },
-        {
-          id: 'testID3',
-          title: 'test data',
-          description: 'test data description',
-          thumbnail: 'https://i.ytimg.com/vi/Pxvmb2ykGTA/hqdefault.jpg?sqp=-oaymwEYCNIBEHZIVfKriqkDCwgBFQAAiEIYAXAB&rs=AOn4CLDCGwdrklSj6MmIcU13frqifHgL8w'
-        },
-      ]
+      videos: []
     }
+  },
+  mounted () {
+    Api().get('videos/popular').then((videos) => {
+      this.videos = videos.data
+    })
   }
 }
 </script>
