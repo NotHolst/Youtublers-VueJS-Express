@@ -70,13 +70,12 @@ export default {
         if (this.$refs.form.validate()) {
 
           const formData = new FormData();
+          formData.append('title', this.title)
+          formData.append('description', this.description)
+          formData.append('category', this.category)
+          formData.append('video', this.video)
 
-          Api().post('/videos/upload', {
-            title: this.title,
-            description: this.description,
-            video: this.video,
-            category: this.category
-          }).then(() => {
+          Api().post('/videos/upload', formData).then(() => {
 
           }).catch(() => {
               this.uploadText = 'Server could not be reached'

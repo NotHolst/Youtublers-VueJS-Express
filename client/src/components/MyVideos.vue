@@ -2,7 +2,7 @@
   <div>
       <v-layout row>
         <h4 class="display-1">My Videos</h4>
-        <v-btn color="primary" dark @click="$router.push('/user/videos/upload')">Upload Video</v-btn>
+        <v-btn absolute right color="primary" dark @click="$router.push('/user/videos/upload')">Upload Video</v-btn>
       </v-layout>
     <v-layout row wrap>
       <v-flex pr-3 pl-3 pt-3 pb-3 xs6 v-for="video in videos" v-bind:key="video.id">
