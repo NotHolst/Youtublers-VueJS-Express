@@ -5,12 +5,23 @@ import Login from '@/components/Login'
 import MostPopular from '@/components/MostPopular'
 import MyVideos from '@/components/MyVideos'
 import UploadVideo from '@/components/UploadVideo'
+import Watch from '@/components/Watch'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/signup',
+      name: 'SignUp',
+      component: SignUp
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
     {
       path: '/',
       name: 'MostPopular',
@@ -32,14 +43,9 @@ export default new Router({
       component: UploadVideo
     },
     {
-      path: '/signup',
-      name: 'SignUp',
-      component: SignUp
-    },
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login
+      path: '/watch',
+      name: 'Watch',
+      component: Watch
     },
   ]
 })

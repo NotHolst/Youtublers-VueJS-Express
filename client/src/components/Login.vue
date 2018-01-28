@@ -37,6 +37,8 @@ export default {
           }).then((res) => {
             this.$store.dispatch('setUser', res.data.user)
             this.$store.dispatch('setToken', res.data.token)
+            this.$socket.emit('authenticate', {token: res.data.token})
+
             this.$router.push({
               name: 'MostPopular', 
               params: {flashMessage: 'You are now logged in' }

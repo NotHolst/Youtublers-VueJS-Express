@@ -7,10 +7,14 @@ import store from './store/store'
 import {sync} from 'vuex-router-sync'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
+import VueSocketio from 'vue-socket.io';
+
 Vue.use(Vuetify)
+Vue.use(VueSocketio, 'http://localhost:1337');
 
 Vue.config.productionTip = false
 sync(store, router)
+
 
 new Vue({
   el: '#app',

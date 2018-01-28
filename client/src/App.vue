@@ -67,12 +67,17 @@
         <router-view></router-view>
       </v-container>
     </v-content>
+    <v-snackbar v-if="currentNotification != null" v-model="showNotification" :color="currentNotification.type">
+      {{currentNotification.message}}
+      <v-btn dark flat @click.native="snackbar = false">Close</v-btn>
+    </v-snackbar>
   </v-app>
 </template>
 
 <script>
   export default {
     data: () => ({
+      isConnected: false,
       drawer: null,
       items: [
         { 
@@ -97,10 +102,37 @@
           text: 'Notification Tester', 
           route: '/test/notifications' 
           },
-      ]
+      ],
+      currentNotification: null,
+      showNotification: false
     }),
     props: {
-    }
+    },
+    sockets: {
+      connect() {
+        // Fired when the socket connects.
+        this.isConnected = true;
+      },
+
+      disconnect() {
+        this.isConnected = false;
+      },
+
+      // Fired when the server sends something on the "messageChannel" channel.
+      messageChannel(data) {
+        this.socketMessage = data
+      },
+      notification(data) {
+          this.currentNotification = data
+          setTimeout(() => {
+            this.showNotification = true
+          }, 50);
+          setTimeout(() => {
+            this.showNotification = false
+          }, 6000);
+      },
+
+    },
   }
 </script>
 
