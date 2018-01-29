@@ -1,14 +1,17 @@
 <template>
   <div>
-    <video-player></video-player>
+    <video-player :videoid="$route.query.v"></video-player>
+    <video-comments :videoid="$route.query.v"></video-comments>
   </div>
 </template>
 
 <script>
 import VideoPlayer from './VideoPlayer'
+import VideoComments from './VideoComments'
 export default {
     components: {
-        VideoPlayer
+        VideoPlayer,
+        VideoComments
     },
     name: 'Watch',
     data () {

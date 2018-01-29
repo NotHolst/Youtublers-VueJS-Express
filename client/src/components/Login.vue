@@ -44,14 +44,7 @@ export default {
               params: {flashMessage: 'You are now logged in' }
               })
           }).catch((e) => {
-              switch(e.response.data.error.name){
-                case 'SequelizeUniqueConstraintError':{
-                  this.errorText = 'Username already taken, please pick another one'
-                }
-                default:{
-
-                }
-              }
+              this.errorText = e.response.data.error
           })
         }
       },

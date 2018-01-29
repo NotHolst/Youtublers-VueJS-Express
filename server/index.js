@@ -22,6 +22,7 @@ io.on('connection', (socket) => {
         try {
             let user = jwt.verify(data.token, 'hashtag')
             socket.emit('notification', {message: 'authenticated'})
+            authenticatedSockets[data.token] = socket
         } catch (error) {
             console.log(data)
             socket.disconnect(true)
@@ -33,7 +34,7 @@ app.use(cors());
 app.use(parser.json());
 app.use(express.static('./public/'))
 
-require('./routes')(app)
+require('./routes')(app, authenticatedSockets)
 
 sequelize.sync().then(() => {  
     app.listen(8081);

@@ -3,7 +3,7 @@ const VideoController = require('./controllers/VideoController')
 const multer = require('multer')
 const path = require('path')
 
-module.exports = (app) => {
+module.exports = (app, sockets) => {
 
     const storage = multer.diskStorage({
         destination: function (req, file, cb) {
@@ -31,6 +31,22 @@ module.exports = (app) => {
 
     app.get('/videos/popular', (req, res) => {
         VideoController.allVideos(req,res)
+    })
+
+    app.get('/video', (req, res) => {
+        VideoController.getVideo(req,res)
+    })
+
+    app.get('/videocomments', (req, res) => {
+        VideoController.getVideoComments(req,res)
+    })
+
+    app.post('/comment', (req, res) => {
+        VideoController.addComment(req,res, sockets)
+    })
+
+    app.post('/user/videos', (req, res) => {
+        VideoController.userVideos(req,res)
     })
 
 }

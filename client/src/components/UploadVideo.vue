@@ -22,13 +22,6 @@
         ]"
         required
         ></v-text-field>
-        <v-select
-        label="Category"
-        v-model="category"
-        :items="categoryOptions"
-        :rules="[v => !!v || 'Item is required']"
-        required
-        ></v-select>
 
         <v-btn
         @click="submit"
@@ -50,15 +43,13 @@ export default {
       video: null,
       uploadText: 'Choose a video file',
       title: '',
-      description: '',
-      category: null,
-      categoryOptions: [
-        'Gaming',
-        'Vlogs',
-        'Cats',
-        'News'
-      ]
+      description: ''
     }),
+    mounted () {
+      if(this.$store.state.token == null){
+        this.$router.push('/')
+      }
+    },
   methods: {
       setVideo (e){
           var files = e.target.files || e.dataTransfer.files;
@@ -72,11 +63,11 @@ export default {
           const formData = new FormData();
           formData.append('title', this.title)
           formData.append('description', this.description)
-          formData.append('category', this.category)
           formData.append('video', this.video)
+          formData.append('token', this.$store.state.token)
 
           Api().post('/videos/upload', formData).then(() => {
-
+            this.$router.push('/user/videos')
           }).catch(() => {
               this.uploadText = 'Server could not be reached'
           })

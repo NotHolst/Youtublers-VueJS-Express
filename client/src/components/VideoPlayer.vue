@@ -1,6 +1,6 @@
 <template>
   <div>
-    <video class="flex xs12" :src="video.url" autoplay controls/>
+    <video class="flex xs12" :src="videoURL" autoplay controls/>
     <v-card class="mt-2">
       <v-card-title primary-title>
           <div>
@@ -14,17 +14,24 @@
 </template>
 
 <script>
+import Api from '../Api'
 export default {
   name: 'VideoPlayer',
   data () {
     return {
-      video: {
-          id: 'testID1',
-          title: 'this is a cat video',
-          description: 'may contain cats',
-          thumbnail: 'https://i.ytimg.com/vi/Pxvmb2ykGTA/hqdefault.jpg?sqp=-oaymwEYCNIBEHZIVfKriqkDCwgBFQAAiEIYAXAB&rs=AOn4CLDCGwdrklSj6MmIcU13frqifHgL8w',
-          url: 'http://localhost:8081/videos/rklt5BcSM.mp4'
-        },
+      video: {},
+    }
+  },
+  props: ['videoid'],
+  mounted() {
+    Api().get('video?v='+this.videoid).then((res) => {
+      console.log()
+      this.video = res.data
+    })
+  },
+  computed: {
+    videoURL() {
+      return 'http://localhost:8081/videos/' + this.video.id + '.mp4'
     }
   }
 }

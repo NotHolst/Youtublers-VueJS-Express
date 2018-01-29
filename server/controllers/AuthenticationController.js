@@ -21,7 +21,7 @@ module.exports = {
     login(req, res) {
         let {username, password} = req.body
         User.findOne({ where: { username: username } }).then((user) => {
-            if(sha1(password) === user.password){
+            if(user != null && sha1(password) === user.password){
                 let token = jwt.sign({data: user}, 'hashtag', {expiresIn: 60*60*5})
 
                 return res.send({
